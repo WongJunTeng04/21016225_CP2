@@ -1,4 +1,6 @@
  # main_control_app.py
+ 
+#Imports
 import cv2
 import time
 import os
