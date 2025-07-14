@@ -1,0 +1,9 @@
+{
+  "STOP": "Stopping robot",
+  "GO_FORWARD": "Moving forward",
+  "MOVE_BACKWARD": "Moving backward",
+  "TURN_RIGHT": "Turning right",
+  "TURN_LEFT": "Turning left",
+  "UNKNOWN_GESTURE": "Gesture not recognized",
+  "NO_HAND": "No hand detected"
+}

@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environments
+venv/
+.venv/
+venv_robot_ux/  # <<<--- THIS IS THE MOST IMPORTANT LINE
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
