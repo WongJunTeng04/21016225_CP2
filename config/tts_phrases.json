@@ -5,5 +5,9 @@
   "TURN_RIGHT": "Turning right",
   "TURN_LEFT": "Turning left",
   "UNKNOWN_GESTURE": "Gesture not recognized",
-  "NO_HAND": "No hand detected"
+  "NO_HAND": "No hand detected",
+  "GO_FORWARD_VOICE": "Forward",
+  "MOVE_BACKWARD_VOICE": "Backward",
+  "TURN_RIGHT_VOICE": "Right",
+  "TURN_LEFT_VOICE": "Left"
 }

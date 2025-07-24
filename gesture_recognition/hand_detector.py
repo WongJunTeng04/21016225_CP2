@@ -1,15 +1,24 @@
+# hand_detector.py
+
+# Imports
 import cv2
 import mediapipe as mp
 import time
 
 # To detect hands using MediaPipe
 class HandDetector:
+    # HandDetector class initializes MediaPipe Hands Solutions with specified parameters.
+    # Parameters:
+    # - static_mode: If True, processes images as static images (default False).
+    # - max_hands: Maximum number of hands to detect (default 1).
+    # - min_detection_confidence: Minimum confidence for hand detection (default 0.7).
+    # - min_tracking_confidence: Minimum confidence for hand tracking (default 0.5).
     def __init__(self, static_mode=False, max_hands=1, min_detection_confidence=0.7, min_tracking_confidence=0.5):
-        self.static_mode = static_mode
-        self.max_hands = max_hands
-        self.min_detection_confidence = min_detection_confidence
-        self.min_tracking_confidence = min_tracking_confidence
-        self.mp_hands = mp.solutions.hands
+        self.static_mode = static_mode  # Whether to treat images as static
+        self.max_hands = max_hands # Maximum number of hands to detect
+        self.min_detection_confidence = min_detection_confidence # Minimum confidence for hand detection
+        self.min_tracking_confidence = min_tracking_confidence # Minimum confidence for hand tracking
+        self.mp_hands = mp.solutions.hands 
         self.hands = self.mp_hands.Hands(
             static_image_mode=self.static_mode,
             max_num_hands=self.max_hands,
@@ -21,19 +30,17 @@ class HandDetector:
         self.results = None
 
     # Find the hands in the given RGB image.
+    # Processes an RGB image to find hand landmarks.
+    # Returns the processed results object from MediaPipe.
     def find_hands(self, image_rgb):
-        """
-        Processes an RGB image to find hand landmarks.
-        Returns the processed results object from MediaPipe.
-        """
-        image_rgb.flags.writeable = False # To improve performance
+        image_rgb.flags.writeable = False
         self.results = self.hands.process(image_rgb)
         image_rgb.flags.writeable = True
         return self.results
 
     # Draw the landmarks 
+    # Draws landmarks and connections on a BGR image.
     def draw_landmarks(self, image_bgr, hand_landmarks):
-        """Draws landmarks and connections on a BGR image."""
         self.mp_drawing.draw_landmarks(
             image_bgr,
             hand_landmarks,
@@ -48,15 +55,17 @@ class HandDetector:
     # If hands are detected, returns a tuple of (multi_hand_landmarks, multi_handedness).
     # multi_hand_landmarks is a list of landmarks for each detected hand.
     def get_landmarks(self):
-        """Returns multi_hand_landmarks and multi_handedness if hands are detected."""
         if self.results and self.results.multi_hand_landmarks:
             return self.results.multi_hand_landmarks, self.results.multi_handedness
         return None, None
 
+    # Close the MediaPipe Hands instance to release resources.
     def close(self):
         self.hands.close()
 
 if __name__ == '__main__':
+    
+    # Test the HandDetector
     from camera_manager import CameraManager
 
     cam = CameraManager()
